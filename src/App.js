@@ -7,9 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Checkers-React
-        </p>
+        <p>Checkers-React</p>
       </header>
     </div>
   );
