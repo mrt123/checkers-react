@@ -1,35 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Field from './Field.js';
-import styled from 'styled-components';
-
-const BoardBox = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 480px;
-  height: 480px;
-  background: grey;
-`;
+import BoardBox from './BoardBox';
+import { getFields } from '../gameLogic/fieldsApi.js';
 
 export default ({ x }) => {
-  const fields = Array.apply(null, { length: 64 }).map((x, i) => {
-    const rowNumber = Math.floor(i / 8);
-    const evenRow = rowNumber % 2 === 0;
-    const evenFieldNumber = i % 2 === 0;
+  const counter = useSelector(state => state.testState);
+  const dispatch = useDispatch();
 
-    return {
-      i,
-      color: getFieldColor(evenFieldNumber, evenRow),
-      rowNumber,
-      x: evenFieldNumber
-    };
-  });
+  const [count, setCount] = useState(0);
+
+  const fields = getFields();
 
   const pinEls = fields.map(p => <Field key={p.i} def={p}></Field>);
+  const movePin = () =>
+    dispatch({ type: 'MOVE_PIN', pinId: '1', targetId: '1' });
 
-  return <BoardBox>{pinEls}</BoardBox>;
+  return (
+    <BoardBox>
+      {pinEls}
+      <div>
+        <p>Counter: {counter} </p>
+        <button onClick={movePin}>Move Pin</button>
+
+        <p>You clicked {count} times</p>
+        <button onClick={() => setCount(count + 1)}>Click me</button>
+      </div>
+    </BoardBox>
+  );
 };
-
-function getFieldColor(evenFieldNumber, evenRow) {
-  const shouldBeWhite = evenRow ? evenFieldNumber : !evenFieldNumber;
-  return shouldBeWhite ? 'white' : 'black';
-}
