@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Field from './Field.js';
 import BoardBox from './BoardBox';
-import { getFields } from '../gameLogic/fieldsApi.js';
+import { getFields } from '../gameApi/fieldsApi.js';
 
 export default ({ x }) => {
   const counter = useSelector(state => state.testState);
@@ -12,13 +12,13 @@ export default ({ x }) => {
 
   const fields = getFields();
 
-  const pinEls = fields.map(p => <Field key={p.i} def={p}></Field>);
+  const fieldsEls = fields.map(p => <Field key={p.i} def={p}></Field>);
   const movePin = () =>
     dispatch({ type: 'MOVE_PIN', pinId: '1', targetId: '1' });
 
   return (
     <BoardBox>
-      {pinEls}
+      {fieldsEls}
       <div>
         <p>Counter: {counter} </p>
         <button onClick={movePin}>Move Pin</button>
