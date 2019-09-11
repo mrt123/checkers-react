@@ -1,23 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PinBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const FieldBox = styled.div`
+  position: absolute;
+  z-index: 200;
+  left: ${p => p.x * 60}px;
+  top: ${p => p.y * 60}px;
   width: 60px;
   height: 60px;
   background-color: ${p => p.color};
   color: red;
   font-size: 9px;
-  overflow-wrap: break-word;
-  word-break: break-all;
 `;
 
 export default ({ def }) => {
+  debugger;
   return (
-    <PinBox color={def.color}>
-      {def.y} - {def.x}
-    </PinBox>
+    <FieldBox {...def}>
+      {def.y} : {def.x}
+    </FieldBox>
   );
 };
