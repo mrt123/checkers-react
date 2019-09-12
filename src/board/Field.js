@@ -14,7 +14,6 @@ const FieldBox = styled.div`
 `;
 
 export default ({ def }) => {
-  debugger;
   return (
     <FieldBox {...def}>
       {def.y} : {def.x}
