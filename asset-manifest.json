@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/checkers-react/static/css/main.54f545a7.chunk.css",
-    "main.js": "/checkers-react/static/js/main.7f46154b.chunk.js",
-    "main.js.map": "/checkers-react/static/js/main.7f46154b.chunk.js.map",
+    "main.js": "/checkers-react/static/js/main.b9d0381b.chunk.js",
+    "main.js.map": "/checkers-react/static/js/main.b9d0381b.chunk.js.map",
     "runtime~main.js": "/checkers-react/static/js/runtime~main.8895a125.js",
     "runtime~main.js.map": "/checkers-react/static/js/runtime~main.8895a125.js.map",
     "static/css/2.764ccc25.chunk.css": "/checkers-react/static/css/2.764ccc25.chunk.css",
     "static/js/2.d27584fa.chunk.js": "/checkers-react/static/js/2.d27584fa.chunk.js",
     "static/js/2.d27584fa.chunk.js.map": "/checkers-react/static/js/2.d27584fa.chunk.js.map",
     "index.html": "/checkers-react/index.html",
-    "precache-manifest.44c2f664021b16e590b92f0322a8c93c.js": "/checkers-react/precache-manifest.44c2f664021b16e590b92f0322a8c93c.js",
+    "precache-manifest.f7e755551c82582cfbd3766b69be3fd4.js": "/checkers-react/precache-manifest.f7e755551c82582cfbd3766b69be3fd4.js",
     "service-worker.js": "/checkers-react/service-worker.js",
     "static/css/2.764ccc25.chunk.css.map": "/checkers-react/static/css/2.764ccc25.chunk.css.map",
     "static/css/main.54f545a7.chunk.css.map": "/checkers-react/static/css/main.54f545a7.chunk.css.map"
