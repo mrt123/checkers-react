@@ -6,3 +6,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Install and use
 * ```yarn install```
 * ```yarn start```
+
+[demo](https://mrt123.github.io/checkers-react/)
