@@ -1,6 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Branches
+# checkers-react
+* simple checkers game with react & redux
 
-* master - represents pin dragging with hybrid of native html5 drag and pin animated manually
-* nativeDrop - represent pin dragging and dropping build 100% on the native html5 drag events
+## Install and use
+* ```yarn install```
+* ```yarn start```
