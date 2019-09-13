@@ -1,83 +1,43 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-const pinRadius = 50;
-const fieldSize = 60;
-const pinMargin = (fieldSize - pinRadius) / 2;
-
 const Pin = styled.div`
-  position: absolute;
-  z-index: 201;
-  left: ${p => p.x + pinMargin}px;
-  top: ${p => p.y + pinMargin}px;
-
+  z-index: 202;
   border-radius: 25px;
-  width: ${pinRadius}px;
-  height: ${pinRadius}px;
-
+  width: 50px;
+  height: 50px;
   background-color: ${p => p.color};
+  visibility: ${p => p.visibility};
+  border: 5px solid black;
 `;
 
-const Pin2 = styled.div.attrs({
-  style: ({ x, y }) => ({
-    top: y + pinMargin + 'px',
-    left: x + pinMargin + 'px'
-  })
-})`
-  position: absolute;
-  z-index: 201;
-  border-radius: 25px;
-  width: ${pinRadius}px;
-  height: ${pinRadius}px;
-  background-color: ${p => p.color};
-`;
+export default ({ pin }) => {
+  const dispatch = useDispatch();
+  const activePin = useSelector(state => state.board.activePin);
+  const setActivePin = () => dispatch({ type: 'SET_ACTIVE_PIN', pin: pin });
+  const [visibility, setVisibility] = useState('visible');
 
-const Pin3 = styled.div.attrs(p => ({
-  style: {
-    top: p.y + pinMargin + 'px',
-    left: p.x + pinMargin + 'px'
-  }
-}))`
-  position: absolute;
-  z-index: 201;
-  border-radius: 25px;
-  width: ${pinRadius}px;
-  height: ${pinRadius}px;
-  background-color: ${p => p.color};
-`;
-
-export default ({ def }) => {
-  const boardX = def.x;
-  const boardY = def.y;
-  const pixelX = fieldSize * boardX;
-  const pixelY = fieldSize * boardY;
-
-  const [pixelPosition, setPixelPosition] = useState({ x: pixelX, y: pixelY });
-  const [dragStartPosition, setDragStartPosition] = useState({ x: 0, y: 0 });
-
-  const onDrag = e => {
-    const dragDiff = {
-      x: e.clientX === 0 ? 0 : e.clientX - dragStartPosition.x,
-      y: e.clientY === 0 ? 0 : e.clientY - dragStartPosition.y
-    };
-    setPixelPosition({
-      x: pixelX + dragDiff.x,
-      y: pixelY + dragDiff.y
+  const onDragStart = () => {
+    if (activePin !== pin) {
+      setActivePin(pin);
+    }
+    setTimeout(() => {
+      setVisibility('hidden'); // hides original element but leaves dragged
     });
   };
 
-  const onDragStart = e => setDragStartPosition({ x: e.clientX, y: e.clientY });
+  const onDragEnd = () => {
+    setVisibility('visible');
+  };
 
   return (
-    <Pin3
-      x={pixelPosition.x}
-      y={pixelPosition.y}
-      color={def.color}
+    <Pin
+      color={pin.color}
+      visibility={visibility}
       draggable="true"
-      onDrag={onDrag}
       onDragStart={onDragStart}
-    >
-      {dragStartPosition.x}
-    </Pin3>
+      onDragEnd={onDragEnd}
+    ></Pin>
   );
 };

@@ -1,13 +1,24 @@
-export function populatePins(fields) {
-  const pins = fields.map(f => {
-    if (f.y <= 2 && f.color === 'black') return createPin(f.x, f.y, 'orange');
-    if (f.y >= 5 && f.color === 'black') return createPin(f.x, f.y, 'white');
-    else return null;
-  });
+export function tryMove(pin, fieldTarget, fields) {
+  if (fieldTarget.pin !== null || fieldTarget.color === 'white') return { type: 'illegal' };
 
-  return pins.filter(x => x !== null);
-}
+  const pinX = pin.x;
+  const pinY = pin.y;
 
-function createPin(x, y, color) {
-  return { x, y, color };
+  const moveCountX = Math.abs(fieldTarget.x - pinX);
+  const moveCountY = fieldTarget.y - pinY;
+
+  if (moveCountX === 1 && moveCountY === pin.moveDirection * 1) return { type: 'normal' };
+  else if (moveCountX === 2 && moveCountY === pin.moveDirection * 2) {
+    const intermediateX = pinX + (fieldTarget.x - pinX) / 2;
+    const intermediateY = pinY + (fieldTarget.y - pinY) / 2;
+
+    const intermediateField = fields.filter(f => {
+      return f.x === intermediateX && f.y === intermediateY;
+    })[0];
+
+    if (intermediateField.pin && intermediateField.pin.color !== pin.color) {
+      return { type: 'kill', killed: intermediateField.pin };
+    } else return { type: 'illegal' };
+  } else return { type: 'illegal' };
+  //TODO: other cases
 }
