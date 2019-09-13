@@ -1,4 +1,4 @@
-export function getFields() {
+export function generateFields() {
   const fields = Array.apply(null, { length: 64 }).map((arg1, i) => {
     const y = Math.floor(i / 8);
     const x = i - 8 * y;

@@ -1,11 +1,11 @@
-import { SET_ACTIVE_PIN, SET_DROP_FIELD, UNSET_DROP_FIELD, TRY_MOVE_PIN } from '../board/boardActions.js';
-import { getFields } from '../../gameApi/fieldsApi.js';
+import { SET_ACTIVE_PIN, SET_HIGHLIGHT_FIELD, UNSET_HIGHLIGHT_FIELD, TRY_MOVE_PIN } from '../board/boardActions.js';
+import { generateFields } from '../../gameApi/fieldsApi.js';
 import { tryMove } from '../../gameApi/boardApi.js';
 
 const board = (
   state = {
     activePin: null,
-    fields: getFields()
+    fields: generateFields()
   },
   action
 ) => {
@@ -16,7 +16,7 @@ const board = (
         activePin: action.pin
       };
     }
-    case SET_DROP_FIELD: {
+    case SET_HIGHLIGHT_FIELD: {
       const moveResult = tryMove(state.activePin, action.f, state.fields);
 
       if (moveResult.type === 'illegal') return state;
@@ -27,7 +27,7 @@ const board = (
         };
       }
     }
-    case UNSET_DROP_FIELD: {
+    case UNSET_HIGHLIGHT_FIELD: {
       return {
         ...state,
         fields: highlightOneField(state.fields, action.f, false)

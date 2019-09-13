@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { SET_ACTIVE_PIN } from '../state/board/boardActions.js';
 
 const Pin = styled.div`
   z-index: 202;
@@ -15,7 +16,7 @@ const Pin = styled.div`
 export default ({ pin }) => {
   const dispatch = useDispatch();
   const activePin = useSelector(state => state.board.activePin);
-  const setActivePin = () => dispatch({ type: 'SET_ACTIVE_PIN', pin: pin });
+  const setActivePin = () => dispatch({ type: SET_ACTIVE_PIN, pin: pin });
   const [visibility, setVisibility] = useState('visible');
 
   const onDragStart = () => {
