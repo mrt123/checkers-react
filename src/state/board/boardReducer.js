@@ -23,7 +23,7 @@ const board = (
         };
     }
     case SET_HIGHLIGHT_FIELD: {
-      const moveResult = tryMove(state.activePin, action.f, state.fields, state.activePlayer);
+      const moveResult = tryMove(state.activePin, action.f, state.fields, state.activePlayer, state.blockActivePin);
 
       if (moveResult.type === 'illegal') return state;
       else {
@@ -42,7 +42,7 @@ const board = (
     case TRY_MOVE_PIN: {
       const targetField = action.f;
       const pin = state.activePin;
-      const moveResult = tryMove(pin, targetField, state.fields, state.activePlayer);
+      const moveResult = tryMove(pin, targetField, state.fields, state.activePlayer, state.blockActivePin);
 
       if (moveResult.type === 'illegal') return state;
       else {
@@ -94,11 +94,6 @@ function highlightOneField(fields, targetField, hlValue) {
     const fieldMatch = f.x === targetField.x && f.y === targetField.y;
     return fieldMatch ? { ...f, highlight: hlValue } : f;
   });
-}
-
-function getNextPlayerAfterKill(updatedPin, fields) {
-  const activePlayer = { color: updatedPin.color };
-  return additionalJumpPossible(updatedPin, fields) ? activePlayer : getOtherPlayer(activePlayer);
 }
 
 function getOtherPlayer(player) {

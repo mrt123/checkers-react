@@ -1,4 +1,4 @@
-export function tryMove(pin, fieldTarget, fields, activePlayer) {
+export function tryMove(pin, fieldTarget, fields, activePlayer, consecutiveMove) {
   const illegalMove = { type: 'illegal', updatedPin: pin };
 
   if (fieldTarget.pin !== null || fieldTarget.color === 'white' || activePlayer.color !== pin.color) return illegalMove;
@@ -10,7 +10,7 @@ export function tryMove(pin, fieldTarget, fields, activePlayer) {
   const moveCountY = fieldTarget.y - pinY;
   const updatedPin = { ...pin, x: fieldTarget.x, y: fieldTarget.y };
 
-  if (moveCountX === 1 && moveCountY === pin.moveDirection * 1) {
+  if (moveCountX === 1 && moveCountY === pin.moveDirection * 1 && !consecutiveMove) {
     return { type: 'normal', updatedPin };
   } else if (moveCountX === 2 && moveCountY === pin.moveDirection * 2) {
     const intermediateX = pinX + (fieldTarget.x - pinX) / 2;
